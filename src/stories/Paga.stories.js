@@ -25,6 +25,5 @@ stories.add('App', () => {
                 email="ugo@doroki.com"
                 payment_reference={getReference()}
                 account_number="41007258779"
-                funding_sources="BANK,CARD,PAGA" 
-            />);
+                funding_sources="BANK,CARD,PAGA"  />);
 })
