@@ -1,6 +1,6 @@
 # react-paga
 
-This is a react.js library for implementing paga checkout\
+This is a react.js library for implementing paga checkout
 
 ###Demo
 
@@ -27,12 +27,12 @@ npm install react-paga --save
     
     	state = {
             src: "https://beta.mypaga.com/checkout/?w=180&h=40",
-            charge_url: "https://mymarket/payment/complete" // your store url for payment verification
+            charge_url: "https://mymarket/payment/complete", // your store url for payment verification
     		key: "######################################", // PAGA PUBLIC KEY
     		email: "john.doe@xyz.com",  // customer email
-    		amount: 10000 // equals NGN100,
-            account_number: "41007258779", // account number identifying customer on the merchant's system.
-            funding_sources: "BANK,CARD,PAGA" // Available options are CARD, BANK and PAGA.
+    		amount: 10000, // equals NGN100,
+        account_number: "41007258779", // account number identifying customer on the merchant's system.
+        funding_sources: "BANK,CARD,PAGA" // Available options are CARD, BANK and PAGA.
     	}
     
     	getReference = () => {
