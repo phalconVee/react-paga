@@ -26,11 +26,11 @@ npm install react-paga --save
     class App extends Component {
     
     	state = {
-            src: "https://beta.mypaga.com/checkout/?w=180&h=40",
+            src: "https://beta.mypaga.com/checkout/?w=180&h=40", // w=width of button, h=height of button
             charge_url: "https://mymarket/payment/complete", // your store url for payment verification
     		    key: "######################################", // PAGA PUBLIC KEY
     		    email: "john.doe@xyz.com",  // customer email
-    		    amount: 10000, // equals NGN100,
+    		    amount: 10000,
             account_number: "41007258779", // account number identifying customer on the merchant's system.
             funding_sources: "BANK,CARD,PAGA" // Available options are CARD, BANK and PAGA.
     	}
@@ -57,7 +57,7 @@ npm install react-paga --save
                 email={this.state.email}
                 payment_reference={getReference()}
                 account_number={this.state.account_number}
-                funding_sources="BANK,CARD,PAGA" 
+                funding_sources={this.state.funding_sources}
               />
           </div>
         );
