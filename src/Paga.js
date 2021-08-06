@@ -5,7 +5,7 @@ export default function Paga(props) {
   const form = useRef(null);
 
   const [pagaAtrributes, setPagaAttributes] = useState({
-    src: props.src || "https://mypaga.com/checkout/?w=150&h=40",
+    src: props.src || "https://mypaga.com/checkout/?w=160&h=40",
     class: props.class || "",
     charge_url: props.charge_url || "https://mymarket/payment/complete",
     redirect_url_method: props.redirect_url_method || "GET",

@@ -26,7 +26,7 @@ npm install react-paga --save
     class App extends Component {
     
     	state = {
-            src: "https://beta.mypaga.com/checkout/?w=180&h=40", // w=width of button, h=height of button
+            src: "https://beta.mypaga.com/checkout/?w=160&h=40", // w=width of button, h=height of button
             charge_url: "https://mymarket/payment/complete", // your store url for payment verification
     		    key: "######################################", // PAGA PUBLIC KEY
     		    email: "john.doe@xyz.com",  // customer email
