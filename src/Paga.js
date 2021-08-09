@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
+/**
+ * 
+ * @param {Paga react package} props 
+ * @returns 
+ */
 export default function Paga(props) {
   const form = useRef(null);
 
