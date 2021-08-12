@@ -76,6 +76,6 @@ Paga.propTypes = {
   display_name: PropTypes.string,
   display_tagline: PropTypes.string,
   button_label: PropTypes.string,
-  width: PropTypes.number,
+  width: PropTypes.string,
   funding_sources: PropTypes.string
 };
