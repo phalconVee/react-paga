@@ -9,9 +9,8 @@ import PropTypes from "prop-types";
 export default function Paga(props) {
   const form = useRef(null);
 
-  const [pagaAtrributes, setPagaAttributes] = useState({
+  const [pagaAtrributes] = useState({
     src: props.src || "https://mypaga.com/checkout/?w=160&h=40",
-    class: props.class || "",
     charge_url: props.charge_url || "https://mymarket/payment/complete",
     redirect_url_method: props.redirect_url_method || "GET",
     public_key: props.public_key || "",
@@ -48,19 +47,19 @@ export default function Paga(props) {
     return () => {
       form.current.removeChild(script);
     };
+  
   }, []);
 
   return (
     <span>
       <div className={pagaAtrributes.class}>
-        <form action={pagaAtrributes.src} method="POST" ref={form}></form>
+        <form method="POST" ref={form}></form>
       </div>
     </span>
   );
 }
 
 Paga.propTypes = {
-  class: PropTypes.string,
   charge_url: PropTypes.string,
   redirect_url_method: PropTypes.string,
   public_key: PropTypes.string.isRequired,
@@ -70,7 +69,7 @@ Paga.propTypes = {
   account_number: PropTypes.string,
   product_description: PropTypes.string,
   phone_number: PropTypes.string,
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string,
   product_codes: PropTypes.string,
   display_image: PropTypes.string,
   display_name: PropTypes.string,
