@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import "./Paga.css";
+
+const cachedScripts = [];
 
 /**
- * 
- * @param {Paga react package} props 
- * @returns 
+ *
+ * @param {Paga react package} props
+ * @returns
  */
 export default function Paga(props) {
   const form = useRef(null);
+
+  const [state, setState] = useState({
+    loaded: false,
+    error: false,
+  });
 
   const [pagaAtrributes] = useState({
     src: props.src || "https://mypaga.com/checkout/?w=160&h=40",
@@ -27,32 +35,71 @@ export default function Paga(props) {
     display_tagline: props.display_tagline || "",
     button_label: props.button_label || "",
     width: props.width || "200",
-    funding_sources: props.funding_sources || "BANK,CARD,PAGA"
+    funding_sources: props.funding_sources || "BANK,CARD,PAGA",
   });
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = pagaAtrributes.src;
+    if (cachedScripts.includes(pagaAtrributes.src)) {
+      setState({
+        loaded: true,
+        error: false,
+      });
+    } else {
+      cachedScripts.push(pagaAtrributes.src);
 
-    const attributes = Object.keys(pagaAtrributes);
+      const script = document.createElement("script");
+      script.src = pagaAtrributes.src;
 
-    attributes.forEach((key, index) => {
-      script.setAttribute(`data-${key}`, pagaAtrributes[key]);
-    });
+      const attributes = Object.keys(pagaAtrributes);
 
-    script.async = true;
+      attributes.forEach((key, index) => {
+        script.setAttribute(`data-${key}`, pagaAtrributes[key]);
+      });
 
-    form.current.appendChild(script);
+      script.async = true;
 
-    return () => {
-      form.current.removeChild(script);
-    };
-  
-  }, []);
+      form.current.appendChild(script);
+
+      const onScriptLoad = () => {
+        setState({
+          loaded: true,
+          error: false,
+        });
+      };
+
+      const onScriptError = () => {
+        const index = cachedScripts.indexOf(pagaAtrributes.src);
+        if (index >= 0) cachedScripts.splice(index, 1);
+        script.remove();
+
+        setState({
+          loaded: true,
+          error: true,
+        });
+      };
+
+      script.addEventListener("load", onScriptLoad);
+      script.addEventListener("complete", onScriptLoad);
+      script.addEventListener("error", onScriptError);
+
+      document.body.appendChild(script);
+
+      return () => {
+        form.current.removeChild(script);
+        script.removeEventListener("load", onScriptLoad);
+        script.removeEventListener("error", onScriptError);
+      };
+    }
+  }, [pagaAtrributes.src]);
+
+  if (state.error) {
+    throw new Error("Unable to load paga checkout inline script");
+  }
 
   return (
     <span>
       <div className={pagaAtrributes.class}>
+        {!state.loaded && <div className="loader"></div>}
         <form method="POST" ref={form}></form>
       </div>
     </span>
@@ -76,5 +123,5 @@ Paga.propTypes = {
   display_tagline: PropTypes.string,
   button_label: PropTypes.string,
   width: PropTypes.string,
-  funding_sources: PropTypes.string
+  funding_sources: PropTypes.string,
 };
