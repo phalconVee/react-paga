@@ -18,13 +18,19 @@ stories.add("App", () => {
   };
 
   return (
-    <PagaCheckoutButton
-      src="https://qa1.mypaga.com/checkout/?w=160&amp;h=50&amp;url=https://dl.dropboxusercontent.com/s/n1gy0iqo8kpl3lo/doroki_button.png?dl=0"
-      charge_url="https://mymarket/payment/complete"
-      public_key="99570634-B88A-472B-9A88-8C1F7E21F045"
-      amount="1000.00"
-      payment_reference={getReference()}
-      funding_sources="BANK,CARD,PAGA"
-    />
+    <div className="payment">
+      <div className="cta">
+        <div className="orText">Or</div>
+
+        <PagaCheckoutButton
+          src="https://qa1.mypaga.com/checkout/?w=160&amp;h=50&amp;url=https://dl.dropboxusercontent.com/s/n1gy0iqo8kpl3lo/doroki_button.png?dl=0"
+          charge_url="https://mymarket/payment/complete"
+          public_key="99570634-B88A-472B-9A88-8C1F7E21F045"
+          amount="1000.00"
+          payment_reference={getReference()}
+          funding_sources="BANK,CARD,PAGA"
+        />
+      </div>
+    </div>
   );
 });

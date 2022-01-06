@@ -82,8 +82,6 @@ export default function Paga(props) {
       script.addEventListener("complete", onScriptLoad);
       script.addEventListener("error", onScriptError);
 
-      document.body.appendChild(script);
-
       return () => {
         form.current.removeChild(script);
         script.removeEventListener("load", onScriptLoad);
@@ -98,8 +96,8 @@ export default function Paga(props) {
 
   return (
     <span>
+      {!state.loaded ? <div className="loader"></div> : null}
       <div className={pagaAtrributes.class}>
-        {!state.loaded && <div className="loader"></div>}
         <form method="POST" ref={form}></form>
       </div>
     </span>

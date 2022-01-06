@@ -2,8 +2,8 @@
   border: 6px solid #3498db; /* Light grey */
   border-top: 6px solid #f3f3f3; /* Blue */
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
@@ -25,4 +25,24 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.payment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orText {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin-right: 1em;
 }
