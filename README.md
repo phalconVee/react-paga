@@ -19,54 +19,56 @@ npm install react-paga --save
 ### Usage
 
 ```javascript
-    import React, { Component } from 'react';
+import React, { Component } from "react";
 
-    //import the library
-    import PagaCheckoutButton from 'react-paga';
+//import the library
+import PagaCheckoutButton from "react-paga";
 
-    class App extends Component {
+class App extends Component {
+  state = {
+    src:
+      "https://beta.mypaga.com/checkout/?w=180&h=40&url=https://dl.dropboxusercontent.com/s/n1gy0iqo8kpl3lo/doroki_button.png?dl=0", // w=width of button, h=height of button // url=to customise your button add a link to your button image
+    charge_url: "https://mymarket/payment/complete", // your store url for payment verification
+    key: "######################################", // PAGA PUBLIC KEY
+    email: "john.doe@xyz.com", // customer email
+    amount: 10000,
+    account_number: "41007258779", // account number identifying customer on the merchant's system.
+    funding_sources: "BANK,CARD,PAGA", // Available options are CARD, BANK and PAGA.
+    error_message: "unable to load paga checkout", // Optional, error message to display to customers in the case of an error loading the script
+  };
 
-    	state = {
-            src: "https://beta.mypaga.com/checkout/?w=180&h=40&url=https://dl.dropboxusercontent.com/s/n1gy0iqo8kpl3lo/doroki_button.png?dl=0", // w=width of button, h=height of button // url=to customise your button add a link to your button image
-            charge_url: "https://mymarket/payment/complete", // your store url for payment verification
-    		    key: "######################################", // PAGA PUBLIC KEY
-    		    email: "john.doe@xyz.com",  // customer email
-    		    amount: 10000,
-            account_number: "41007258779", // account number identifying customer on the merchant's system.
-            funding_sources: "BANK,CARD,PAGA" // Available options are CARD, BANK and PAGA.
-            error_message: "" // Optional, error message to display to customers in the case of an error loading the script
-    	}
+  getReference = () => {
+    // you can use your own unique reference implementation here
+    let text = "";
+    let possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
 
-    	getReference = () => {
-    		// you can use your own unique reference implementation here
-    		let text = "";
-    		let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
+    for (let i = 0; i < 15; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-    		for( let i=0; i < 15; i++ )
-    			text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  };
 
-    		return text;
-    	}
+  render() {
+    return (
+      <div>
+        <PagaCheckoutButton
+          src={this.state.src}
+          charge_url={this.state.charge_url}
+          public_key={this.state.key}
+          amount={this.state.amount}
+          email={this.state.email}
+          payment_reference={getReference()}
+          account_number={this.state.account_number}
+          funding_sources={this.state.funding_sources}
+          error_message={this.state.error_message}
+        />
+      </div>
+    );
+  }
+}
 
-      render() {
-        return (
-          <div>
-              <PagaCheckoutButton
-                src={this.state.src}
-                charge_url={this.state.charge_url}
-                public_key={this.state.key}
-                amount={this.state.amount}
-                email={this.state.email}
-                payment_reference={getReference()}
-                account_number={this.state.account_number}
-                funding_sources={this.state.funding_sources}
-              />
-          </div>
-        );
-      }
-    }
-
-    export default App;
+export default App;
 ```
 
 Please checkout [Paga Documentation](https://developer-docs.paga.com/docs/paga-checkout) for other available options you can add to the tag.
