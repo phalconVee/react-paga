@@ -36,6 +36,9 @@ export default function Paga(props) {
     button_label: props.button_label || "",
     width: props.width || "200",
     funding_sources: props.funding_sources || "BANK,CARD,PAGA",
+    error_message:
+      props.error_message ||
+      "sorry we are unable to load paga checkout at the moment please try again.",
   });
 
   useEffect(() => {
@@ -91,7 +94,7 @@ export default function Paga(props) {
   }, [pagaAtrributes.src]);
 
   if (state.error) {
-    throw new Error("Unable to load paga checkout inline script");
+    return pagaAtrributes.error_message;
   }
 
   return (
@@ -122,4 +125,5 @@ Paga.propTypes = {
   button_label: PropTypes.string,
   width: PropTypes.string,
   funding_sources: PropTypes.string,
+  error_message: PropTypes.string,
 };

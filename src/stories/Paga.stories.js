@@ -29,6 +29,7 @@ stories.add("App", () => {
           amount="1000.00"
           payment_reference={getReference()}
           funding_sources="BANK,CARD,PAGA"
+          error_message="unable to load paga checkout"
         />
       </div>
     </div>

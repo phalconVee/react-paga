@@ -11,8 +11,9 @@ This is a react.js library for implementing paga checkout
 This React library provides a wrapper to add Paga Checkout to your React application
 
 ### Install
+
 ```
-npm install react-paga --save 
+npm install react-paga --save
 ```
 
 ### Usage
@@ -22,9 +23,9 @@ npm install react-paga --save
 
     //import the library
     import PagaCheckoutButton from 'react-paga';
-    
+
     class App extends Component {
-    
+
     	state = {
             src: "https://beta.mypaga.com/checkout/?w=180&h=40&url=https://dl.dropboxusercontent.com/s/n1gy0iqo8kpl3lo/doroki_button.png?dl=0", // w=width of button, h=height of button // url=to customise your button add a link to your button image
             charge_url: "https://mymarket/payment/complete", // your store url for payment verification
@@ -33,22 +34,23 @@ npm install react-paga --save
     		    amount: 10000,
             account_number: "41007258779", // account number identifying customer on the merchant's system.
             funding_sources: "BANK,CARD,PAGA" // Available options are CARD, BANK and PAGA.
+            error_message: "" // Optional, error message to display to customers in the case of an error loading the script
     	}
-    
+
     	getReference = () => {
     		// you can use your own unique reference implementation here
     		let text = "";
     		let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
-    
+
     		for( let i=0; i < 15; i++ )
     			text += possible.charAt(Math.floor(Math.random() * possible.length));
-    
+
     		return text;
     	}
-    
+
       render() {
         return (
-          <div> 
+          <div>
               <PagaCheckoutButton
                 src={this.state.src}
                 charge_url={this.state.charge_url}
@@ -63,19 +65,21 @@ npm install react-paga --save
         );
       }
     }
-    
+
     export default App;
 ```
 
 Please checkout [Paga Documentation](https://developer-docs.paga.com/docs/paga-checkout) for other available options you can add to the tag.
 
 ## Deployment
+
 REMEMBER TO CHANGE THE KEY WHEN DEPLOYING ON A LIVE/PRODUCTION SYSTEM
 
 ## Contributing
+
 1. Fork it!
 2. Create your feature branch: `git checkout -b feat/feature-name`
-3. Commit your changes: `npm run commit` follow the commit message 
+3. Commit your changes: `npm run commit` follow the commit message
 4. Push to the branch: `git push`
 5. Submit a pull request 😉😉
 
@@ -89,4 +93,5 @@ Thanks!
 Henry Ugochukwu.
 
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
